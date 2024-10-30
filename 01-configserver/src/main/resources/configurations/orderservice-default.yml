@@ -1,0 +1,13 @@
+greeting:
+  message: Hello, dear customer!
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

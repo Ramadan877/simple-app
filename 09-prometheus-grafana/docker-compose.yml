@@ -1,0 +1,25 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "DESKTOP-AA9GCRC:host-gateway"
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources/
+    ports:
+      - "3000:3000"
+#  bash:
+#    image: bash:latest
+#    container_name: bash-for-curl
+#    tty: true
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
