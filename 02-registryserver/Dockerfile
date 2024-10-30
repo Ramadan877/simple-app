@@ -1,4 +1,9 @@
-FROM adoptopenjdk/openjdk11:latest
-RUN mkdir -p /app
+FROM openjdk:11-jre-slim
+
+ENV SPRING_PROFILES_ACTIVE=prod
+
 ADD target/registryserver-1.0-SNAPSHOT.jar /app/registryserver.jar
-CMD java -Dspring.profiles.active=prod2 -Dserver.port=$PORT $JAVA_OPTS -jar /app/registryserver.jar
+
+EXPOSE 8761
+
+ENTRYPOINT ["java", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-jar", "/app.jar"]
